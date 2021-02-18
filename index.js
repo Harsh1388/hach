@@ -4,7 +4,7 @@ const fs=require("fs");
 var requests = require("requests");
 
 const homefile = fs.readFileSync("Home.html","utf-8");
-
+const port =process.env.PORT || 8123;
 const replaceVal=(tempval,orgVal)=>{
   let temperture=tempval.replace("{%tempval%}",(orgVal.main.temp-273.15).toFixed(1));
   temperture=temperture.replace("{%tempmin%}",(orgVal.main.temp_min-273.15).toFixed(1));
@@ -36,4 +36,6 @@ const server=http.createServer((req,res)=>{
    }
 });
 
-server.listen(8123,"localhost");
+server.listen(port,()=>{
+  console.log(`${port}`);
+});
